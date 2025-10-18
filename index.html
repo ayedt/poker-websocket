@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dealer</title>
+</head>
+<body>
+<h1>发牌端</h1>
+<input id="playerId" placeholder="玩家ID" />
+<button onclick="dealCards()">发牌</button>
+<button onclick="dealCommunity(3)">发三张公共牌</button>
+<script>
+let ws = new WebSocket('wss://' + location.host);
+function dealCards(){
+  const id = document.getElementById('playerId').value;
+  ws.send(JSON.stringify({type:'deal', id}));
+}
+function dealCommunity(count){
+  ws.send(JSON.stringify({type:'dealCommunity', count}));
+}
+</script>
+</body>
+</html>
